@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="EstiloVermelhoActionBar"
+        parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/TemaVermelho</item>
+        </style>
+    
+    <style name="TemaVermelho"
+        parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/Vermelho</item>
+        </style>
+
+
+</resources>
