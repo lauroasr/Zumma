@@ -17,7 +17,7 @@ import java.util.List;
 public class Dashboard extends Activity implements AdapterView.OnItemClickListener{
 
     ListView lvPizzarias =null;
-    //List<Pizzaria> listPizzarias;
+    //List<Pizzaria> listPizzarias
 
 
     @Override
