@@ -1,14 +1,17 @@
 package com.example.lauroaugusto.zumma;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.db4o.Db4oEmbedded;
+import com.db4o.EmbeddedObjectContainer;
+import com.db4o.ObjectSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,19 @@ public class Dashboard extends Activity implements AdapterView.OnItemClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        EmbeddedObjectContainer db4o = Db4oEmbedded.openFile("teste.db4o");
+
+        Pizzaria p = new Pizzaria("Tarantela", 1, 1);
+        db4o.store(p);
+        db4o.commit();
+        db4o.close();
+
+        ObjectSet<Pizzaria> query = db4o.query(Pizzaria.class);
+        for (Pizzaria i : query) {
+            Toast.makeText(this, i.getNome(), Toast.LENGTH_LONG).show();
+        }
+
 
         lvPizzarias = (ListView) findViewById(R.id.lvPizzarias);
 
