@@ -40,7 +40,7 @@ public class PizzariaLista extends android.support.v4.app.Fragment implements Ad
     }
 
     private List<Pizzaria> buscarPizzarias(){
-        List<Pizzaria> pizzarias = new ArrayList();
+        List<Pizzaria> pizzarias = new ArrayList<Pizzaria>();
         ObjectContainer oc = Db4oEmbedded.openFile(getActivity().getDir("data", 0) + "/" + "db.db4o");
         ObjectSet<Pizzaria> query = oc.query(Pizzaria.class);
 
@@ -64,7 +64,6 @@ public class PizzariaLista extends android.support.v4.app.Fragment implements Ad
         oc.close();
         return pizzarias;
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-       <color name="Vermelho">#C3492D</color>
+       <color name="CorTema">#ff9d2a14</color>
+       <color name="CorTemaSecundaria">#ffeb2f14</color>
        <color name="Cinza">#bee3e3e3</color>
 </resources>

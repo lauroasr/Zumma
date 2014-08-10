@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="EstiloVermelhoActionBar"
-        parent="android:Theme.Holo.Light">
-        <item name="android:actionBarStyle">@style/TemaVermelho</item>
-        <item name="android:actionBarTabBarStyle">@style/TemaVermelho </item>
-        </style>
+        parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/TemaVermelhoClaro</item>
+        <item name="android:actionBarTabBarStyle">@style/TemaVermelho
+        </item>
+    </style>
     
     <style name="TemaVermelho"
         parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/Vermelho</item>
-        </style>
-
-
+        <item name="android:background">@color/CorTema</item>
+    </style>
+    <style name="TemaVermelhoClaro"
+        parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/CorTemaSecundaria</item>
+    </style>
 </resources>
