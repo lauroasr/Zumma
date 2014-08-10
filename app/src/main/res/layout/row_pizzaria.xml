@@ -27,7 +27,8 @@
                 android:text="Pizzaria"
                 android:textSize="30sp"
                 android:paddingLeft="10dp"
-                android:paddingTop="5dp"/>
+                android:paddingTop="5dp"
+                />
             <TextView
                 android:id="@+id/tvTelefone"
                 android:layout_width="match_parent"

@@ -1,23 +1,29 @@
 package com.example.lauroaugusto.zumma;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+public class Dashboard extends FragmentActivity implements ActionBar.TabListener{
 
-public class Dashboard extends Activity implements AdapterView.OnItemClickListener{
-
-    ListView lvPizzarias =null;
-    //List<Pizzaria> listPizzarias;
+    List<Pizzaria> listPizzarias;
+    ActionBar actionBar;
+    ViewPager viewPager;
 
 
     @Override
@@ -25,15 +31,43 @@ public class Dashboard extends Activity implements AdapterView.OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        lvPizzarias = (ListView) findViewById(R.id.lvPizzarias);
 
-        List<Pizzaria> pizzaria = gerarPizzarias();
+        /* recupera a view da acivity e cria as fragments com o adapter */
+        viewPager = (ViewPager) findViewById(R.id.activity_dashbord);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
 
-        PizzariaAdapter pizzariasAdapter = new PizzariaAdapter(this, pizzaria);
-        lvPizzarias.setAdapter(pizzariasAdapter);
-        lvPizzarias.setOnItemClickListener(this);
+
+
+        actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+        /* pega a mudança da tab view*/
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i2) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                actionBar.setSelectedNavigationItem(i);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
+        ActionBar.Tab tabListaPizzaria = actionBar.newTab().setText("Pizzarias").setTabListener(this);
+        ActionBar.Tab tabPizzariaFavorita = actionBar.newTab().setText("Pizzaria Favorita").setTabListener(this);
+        ActionBar.Tab tabPizzaFavorita = actionBar.newTab().setText("Pizza Favorita").setTabListener(this);
+
+        actionBar.addTab(tabListaPizzaria);
+        actionBar.addTab(tabPizzariaFavorita);
+        actionBar.addTab(tabPizzaFavorita);
+
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,40 +88,49 @@ public class Dashboard extends Activity implements AdapterView.OnItemClickListen
         return super.onOptionsItemSelected(item);
     }
 
+    /* pega a mudança da tab view*/
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-        //Pizzaria p = (Pizzaria)adapterView.getItemAtPosition(position);
-
-        //intent =  new Intent(this, LojaUm.class);
-        //intent.putExtra("PARAMETRO", p);
-        //startActivity(intent);
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        viewPager.setCurrentItem(tab.getPosition());
+        Log.d("Zumma","OnTabSelected em "+"posição: "+ tab.getPosition()+"Nome"+ tab.getText());
     }
 
-    private List<Pizzaria> gerarPizzarias(){
-        List<Pizzaria> pizzaria = new ArrayList<Pizzaria>();
-        pizzaria.add(criaPizzaria("Loja1", R.drawable.ic_launcher, 0));
-        pizzaria.add(criaPizzaria("Loja2", R.drawable.ic_launcher, 1));
-        pizzaria.add(criaPizzaria("Loja3", R.drawable.ic_launcher, 2));
-        pizzaria.add(criaPizzaria("Loja4", R.drawable.ic_launcher, 3));
-        pizzaria.add(criaPizzaria("Loja5", R.drawable.ic_launcher, 4));
-        pizzaria.add(criaPizzaria("Loja6", R.drawable.ic_launcher, 5));
-        pizzaria.add(criaPizzaria("Loja7", R.drawable.ic_launcher, 6));
-        pizzaria.add(criaPizzaria("Loja8", R.drawable.ic_launcher, 7));
-        pizzaria.add(criaPizzaria("Loja9", R.drawable.ic_launcher, 8));
-        pizzaria.add(criaPizzaria("Loja10", R.drawable.ic_launcher, 9));
-        pizzaria.add(criaPizzaria("Loja11", R.drawable.ic_launcher, 10));
-        pizzaria.add(criaPizzaria("Loja12", R.drawable.ic_launcher, 11));
-        pizzaria.add(criaPizzaria("Loja13", R.drawable.ic_launcher, 12));
-        pizzaria.add(criaPizzaria("Loja14", R.drawable.ic_launcher, 13));
-        pizzaria.add(criaPizzaria("Loja15", R.drawable.ic_launcher, 14));
-
-        return pizzaria;
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        Log.d("Zumma","OnTabUnSelected em "+"posição: "+ tab.getPosition()+"Nome"+ tab.getText());
     }
 
-    private Pizzaria criaPizzaria(String nome, int idImg, int id){
-        Pizzaria pizzaria = new Pizzaria(nome,idImg, id);
-        return pizzaria;
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+        Log.d("Zumma","OnTabReSelected em "+"posição: "+ tab.getPosition()+"Nome"+ tab.getText());
+    }
+}
+
+class ViewPagerAdapter extends FragmentPagerAdapter{
+
+    public ViewPagerAdapter(FragmentManager fm) {
+        super(fm);
     }
 
+    @Override
+    public Fragment getItem(int item) {
+        Fragment fragment=null;
+
+        if(item == 0){
+            fragment = new PizzariaLista();
+        }
+        if(item == 1){
+            fragment = new PizzariaFavorita();
+        }
+        if (item == 2){
+            fragment = new PizzaFavorita();
+        }
+
+        return fragment;
+    }
+
+    @Override
+    public int getCount() {
+        return 3;
+    }
 }

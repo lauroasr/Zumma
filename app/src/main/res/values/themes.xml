@@ -3,6 +3,7 @@
     <style name="EstiloVermelhoActionBar"
         parent="android:Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/TemaVermelho</item>
+        <item name="android:actionBarTabBarStyle">@style/TemaVermelho </item>
         </style>
     
     <style name="TemaVermelho"
