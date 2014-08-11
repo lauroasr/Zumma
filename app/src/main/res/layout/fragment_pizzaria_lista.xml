@@ -2,18 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lauroaugusto.zumma.PizzariaLista">
+    tools:context="com.example.lauroaugusto.zumma.PizzariaLista"
+    android:background="@color/Cinza">
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical"
-       android:background="@color/Cinza"
-       >
+       android:background="@color/Cinza">
        <ListView
            android:layout_width="match_parent"
            android:layout_height="match_parent"
-           android:id="@+id/lvTarap"/>
+           android:id="@+id/lvTarap"
+           android:divider="@null"
+           android:dividerHeight="0dp"/>
    </LinearLayout>
 
 </FrameLayout>

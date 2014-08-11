@@ -38,9 +38,9 @@ public class PizzariaAdapter extends ArrayAdapter<Pizzaria> {
         tvNomePizzaria.setText(pizzaria.getNome());
 
         return convertView;
-        }
+    }
 
-    public void init(View view){
+    public void init(View view) {
         ivPizzaria = (ImageView) view.findViewById(R.id.ivViewPizzaria);
         tvNomePizzaria = (TextView) view.findViewById(R.id.tvNomePizzaria);
         tvNumeroPizzaria = (TextView) view.findViewById(R.id.tvTelefone);
