@@ -49,7 +49,7 @@ public class PizzariaLista extends android.support.v4.app.Fragment implements Ad
             // TODO: Buscar do seridor as pizzarias.
 
             for (int i = 0; i < 10; i++) {
-                Pizzaria pizzaria = new Pizzaria("Loja " + (i + 1), R.drawable.ic_launcher, i + 1);
+                Pizzaria pizzaria = new Pizzaria("Loja " + (i + 1), R.drawable.chrome, i + 1);
                 pizzarias.add(pizzaria);
                 oc.store(pizzaria);
             }
